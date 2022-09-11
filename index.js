@@ -1,10 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { Express } from "express";
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = process.env.FIREBASE_CONFIG;
+const express = require('express');
+const { db } = require('./lib/db');
+const app = express();
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+app.listen(3000,() => {
+    console.log('Listening on port 3000...')
+})
+db();
