@@ -51,3 +51,10 @@ module.exports.updatePermission = () => {
           }
     }
 }
+
+module.exports.deletePermission = () => {
+    return async(req,res) => {
+        const permission = await Permission.findByIdAndDelete(req.params.id);
+        res.status(200).json({message:'Deleted successfully!'},permission);
+    }
+}
