@@ -8,9 +8,11 @@ module.exports.getPermissions = () => {
 }
 module.exports.getPermission = () => {
   return async(req,res) => {
+    console.log('request received')
     try {
-    const permission = await Permission.findById(req.params.id);
-    if(permission) return res.status(404).json({message:'Permission not found'});
+      console.log(req.params.id)
+    const permission = await Permission.findById(req.params.id).exec();
+    if(!permission) return res.status(404).json({message:'Permission not found'});
     return res.status(200).json({message:'Permission got!',permission});
     } catch (error) {
       res.status(500).json({message:'Something went wrong! Contact the developer for help.'})
