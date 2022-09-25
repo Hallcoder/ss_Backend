@@ -6,6 +6,18 @@ module.exports.getPermissions = () => {
         res.status(200).json({permissions});
     }
 }
+module.exports.getPermission = () => {
+  return async(req,res) => {
+    try {
+    const permission = await Permission.findById(req.params.id);
+    if(permission) return res.status(404).json({message:'Permission not found'});
+    return res.status(200).json({message:'Permission got!',permission});
+    } catch (error) {
+      res.status(500).json({message:'Something went wrong! Contact the developer for help.'})
+    }
+
+  }
+}
 module.exports.signPermission = () => {
   return async (req, res, next) => {
     try {
@@ -58,8 +70,3 @@ module.exports.deletePermission = () => {
     }
 }
 
-module.exports.searchPermission = () => {
-  return async(req,res) => {
-    
-  }
-}
