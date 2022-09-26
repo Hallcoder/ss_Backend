@@ -1,7 +1,8 @@
 const express = require('express');
 const { db } = require('./lib/db');
 const { Prouter } = require('./routes/permission');
-const cors = require('cors')
+const cors = require('cors');
+const { Urouter } = require('./routes/user');
 const app = express();
 
 app.use(express.json());
@@ -14,7 +15,7 @@ app.use(function(req,res,next){
     next()
 })
 app.use('/permissions',Prouter);
-
+app.use('/user',Urouter);
 app.listen(3000,() => {
     console.log('Listening on port 3000...')
 })

@@ -33,7 +33,7 @@ issuer:{
     required:true
 }
 })
-module.exports.validatePermission = (permission) => {
+// module.exports.validatePermission = (permission) => {
 
-}
+// }
 module.exports.Permission = mongoose.model('Permission',permissionSchema);

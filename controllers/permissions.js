@@ -17,7 +17,6 @@ module.exports.getPermission = () => {
     } catch (error) {
       res.status(500).json({message:'Something went wrong! Contact the developer for help.'})
     }
-
   }
 }
 module.exports.signPermission = () => {
