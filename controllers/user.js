@@ -3,10 +3,14 @@ const { User } = require("../models/user")
 module.exports.saveUser = () => {
     return async(req,res) => {
         try {
-            const user = new User({token:req.body.token});
-            await user.save();
-            res.status(200).json({user,message:'Successfully saved user'});
+            if(!req.body.token) return res.status(404).json({message:'Access Denied!'})
+            const user = await User.findOne({token: req.body.token});
+            if(user) return res.status(200).json({message:'Successfully got the user!',user})
+            const newUser = new User({token:req.body.token});
+            await newUser.save();
+            res.status(200).json({newUser ,message:'Successfully saved user'});
         } catch (error) {
+            console.log(error)
             return res.status(500).json({message:'Something went wrong! Contact your developer'});
         }
     }
