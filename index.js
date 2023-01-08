@@ -7,8 +7,8 @@ const app = express();
 
 app.use(express.json());
 app.use(function (req, res, next) {
-  cors({ origin: "*" });
-  res.header("Access-Control-Allow-Origin", "*");
+  cors({ origin: req.headers.origin });
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Methods", "PUT,GET,POST");
   res.header(
     "Access-Control-Allow-Headers",
