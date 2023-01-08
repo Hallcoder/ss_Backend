@@ -16,7 +16,4 @@ app.use(function(req,res,next){
 })
 app.use('/permissions',Prouter);
 app.use('/user',Urouter);
-app.listen(process.env.PORT || 3000,() => {
-    console.log('Listening on port 3000...');
-})
-db();
+db(app);
