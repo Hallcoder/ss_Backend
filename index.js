@@ -6,7 +6,8 @@ const { Urouter } = require("./routes/user");
 const app = express();
 
 app.use(express.json());
-app.use(function (req, res, next) {
+app.use(async function (req, res, next) {
+  await db();
   cors({ origin: req.headers.origin });
   res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Methods", "PUT,GET,POST");
@@ -20,4 +21,3 @@ app.use(function (req, res, next) {
 app.use("/permissions", Prouter);
 app.use("/user", Urouter);
 app.listen(process.env.PORT || 3000, () => console.log("Listening on port ...",process.env.PORT || 3000));
-db();
