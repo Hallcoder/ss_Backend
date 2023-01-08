@@ -4,7 +4,7 @@ module.exports.saveUser = () => {
     return async(req,res) => {
         try {
             if(!req.body.token) return res.status(404).json({message:'Access Denied!'})
-            const user = await User.findOne({token: req.body.token});
+            const user = await User.findOne({token: req.body.token}).exec();
             if(user) return res.status(200).json({message:'Successfully got the user!',user})
             const newUser = new User({token:req.body.token});
             await newUser.save();
@@ -19,7 +19,7 @@ module.exports.saveUser = () => {
 module.exports.checkUser = () => {
     return async(req,res) => {
         try {
-            const user = await  User.findOne({token:req.params.token});
+            const user = await  User.findOne({token:req.params.token}).exec();
             console.log(user)
             if(!user)  return res.status(403).json({message:'Not authorized'});
             return res.status(200).json({user,message:'Successfully got user'});
